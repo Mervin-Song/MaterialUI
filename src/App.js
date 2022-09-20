@@ -3,7 +3,8 @@ import Navbar from './components/Navbar';
 import PetCard from './components/PetCard';
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
-import { Container } from '@mui/system';
+import Container from '@mui/material/Container';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
     <Navbar />
     <Container>
     <Grid>
-      <Box sx={{ width: '100%'}}>
+      <Box sx={{ width: '100%', overflow:'auto'}}>
       <Grid container >
         <Grid xs={4}>
           <PetCard />
@@ -35,6 +36,7 @@ function App() {
       </Box>  
     </Grid>
     </Container>
+    <Footer/>
     </>
   );
 }
