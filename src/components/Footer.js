@@ -6,10 +6,8 @@ import Link from '@mui/material/Link';
 
 const Footer = () => {
   return (
-    <footer style={{ position: "absolute",
-    left: 0,
-    bottom: 0,
-    right: 0,}}>
+    <footer style={{position:"relative",bottom: 0,width: "100%" }}>
+
         <Box sx={{backgroundColor:"text.secondary", color:"white"}}
         // padding X-axis on mobile device is 3, small devices and above is 10
         px={{xs:3, sm:5}}
