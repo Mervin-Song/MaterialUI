@@ -1,42 +1,21 @@
 import './App.css';
-import Navbar from './components/Navbar';
-import PetCard from './components/PetCard';
-import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
-import Container from '@mui/material/Container';
-import Footer from './components/Footer';
+import SharedLayout from './components/SharedLayout';
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
+//pages
+import PetOwnerLandingPage from './components/petowner/PetOwnerLandingPage';
+import Login from './components/Auth/Login';
 function App() {
   return (
     <>
-    <Navbar />
-    <Container>
-    <Grid>
-      <Box sx={{ width: '100%', overflow:'auto'}}>
-      <Grid container >
-        <Grid xs={4}>
-          <PetCard />
-        </Grid>
-        <Grid xs={4}>
-        <PetCard />
-        </Grid>
-        <Grid xs={4}>
-        <PetCard />
-        </Grid>
-        <Grid xs={4}>
-        <PetCard />
-        </Grid>
-        <Grid xs={4}>
-        <PetCard />
-        </Grid>
-        <Grid xs={4}>
-        <PetCard />
-        </Grid>
-      </Grid>
-      </Box>  
-    </Grid>
-    </Container>
-    <Footer/>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<SharedLayout />}>
+          <Route index element = {<PetOwnerLandingPage />} />
+          <Route path='/login' element={<Login />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
     </>
   );
 }

@@ -22,6 +22,7 @@ const PetCard = () => {
       <Typography gutterBottom variant="h5" component="div">
         Cat
       </Typography>
+
       <Typography variant="body2" color="text.secondary">
         Cats are a widespread group of cats, with over 6,000
         species, ranging across all continents except Antarctica

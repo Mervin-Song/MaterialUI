@@ -6,7 +6,10 @@ import Link from '@mui/material/Link';
 
 const Footer = () => {
   return (
-    <footer>
+    <footer style={{ position: "absolute",
+    left: 0,
+    bottom: 0,
+    right: 0,}}>
         <Box sx={{backgroundColor:"text.secondary", color:"white"}}
         // padding X-axis on mobile device is 3, small devices and above is 10
         px={{xs:3, sm:5}}
@@ -36,7 +39,7 @@ const Footer = () => {
                     <Grid item xs={12} sm={4}>      
                         <Box borderBottom={1}>For Pet Owners</Box>
                         <Box sx={{marginTop:1}}>
-                            <Link href="/" color="inherit">
+                            <Link href="/login" color="inherit">
                                 Login
                             </Link>
                         </Box>
