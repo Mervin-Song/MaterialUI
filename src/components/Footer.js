@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <footer style={{position:"relative",bottom: 0,width: "100%" }}>
 
-        <Box sx={{backgroundColor:"text.secondary", color:"white"}}
+        <Box sx={{backgroundColor:"#FEADD2", color:"white"}}
         // padding X-axis on mobile device is 3, small devices and above is 10
         px={{xs:3, sm:5}}
         py={{xs:5, sm:5}}>

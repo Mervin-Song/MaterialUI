@@ -37,7 +37,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
     //we define useStyles as classes
   return (
     // sx the opener to define css code
-    <AppBar position="static" style={{backgroundColor:"transparent"}}>
+    <AppBar position="static" style={{backgroundColor:"white"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 2}} /> */}
