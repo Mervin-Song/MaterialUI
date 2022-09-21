@@ -3,10 +3,11 @@ import LockIcon from '@mui/icons-material/Lock';
 import FormControlLabel from '@mui/material/FormControlLabel'
 import * as React from 'react';
 import Checkbox from '@mui/material/Checkbox';
-import './login.css'
+// import './login.css'
+import '../../index.css'
 
 const Login = () => {
-  const paperStyle={padding:20,height:'70vh',width:400, margin:"100px auto"}
+  const paperStyle={padding:20,height:'70vh',width:400, margin:"50px auto"}
   const avatarStyle={backgroundColor:'#1bbd7e'}
   const btnStyle={margin:'5px 0',height:'45px'}
   const textFieldStyle={margin:"10px auto"}
@@ -35,8 +36,8 @@ const Login = () => {
                >
               </FormControlLabel>
               <Button type='submit' color='primary' variant="contained" style={btnStyle} fullWidth>Sign in</Button>
-              <Typography style={{position:'relative',top:'10px' }}> Do you have an account?  
-                <Link href="#" style={{padding:"5px"}}>
+              <Typography style={{position:'relative',top:'10px'}}> Do you have an account?  
+                <Link href="/signup" style={{padding:"5px"}}>
                   Sign Up 
                 </Link>
               </Typography>
