@@ -14,7 +14,7 @@ const PetOwnerSignUp = () => {
     return(
         <Grid>
             <Paper elevation={10} style={paperStyle}>
-                <Grid align='center'>
+                <Grid align='center' sx={{padding:5}}>
                      <Avatar style={avatarStyle}><PetsIcon/></Avatar>
                     <h2>Pet Owner Registration</h2>
                 </Grid>
@@ -23,7 +23,7 @@ const PetOwnerSignUp = () => {
                 <TextField style={textFieldStyle} label='Password' placeholder='Enter password' type='password' fullWidth required/>
                 <TextField style={textFieldStyle} label='Confirm Password' placeholder='Enter password' type='password' fullWidth required/>
 
-                <Button type='submit' color='primary' variant="contained" style={btnStyle} fullWidth>Sign Up</Button>
+                <Button type='submit' color='primary' variant="contained" style={btnStyle} fullWidth>Sign Up As A Pet Owner!</Button>
                 <Typography style={{position:'relative',top:'10px'}}> Already have an account with Petgistry?  
                   <Link href="/login" style={{padding:"5px"}}>
                     Login Here!

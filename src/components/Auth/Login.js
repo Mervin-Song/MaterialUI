@@ -7,14 +7,14 @@ import Checkbox from '@mui/material/Checkbox';
 import '../../index.css'
 
 const Login = () => {
-  const paperStyle={padding:20,height:'70vh',width:400, margin:"50px auto"}
+  const paperStyle={padding:20,height:'60vh',width:400, margin:"50px auto"}
   const avatarStyle={backgroundColor:'#1bbd7e'}
   const btnStyle={margin:'5px 0',height:'45px'}
   const textFieldStyle={margin:"10px auto"}
   return(
       <Grid>
           <Paper elevation={10} style={paperStyle}>
-              <Grid align='center'>
+              <Grid align='center' sx={{padding:5}}>
                    <Avatar style={avatarStyle}><LockIcon/></Avatar>
                   <h2>Sign In</h2>
               </Grid>
