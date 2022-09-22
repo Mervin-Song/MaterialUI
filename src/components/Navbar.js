@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import PetsIcon from '@mui/icons-material/Pets';
 const Navbar = () => {
     
 const pages = ['Products', 'Pricing', 'Blog'];
@@ -40,9 +41,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
     <AppBar position="static" style={{backgroundColor:"white"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 2}} /> */}
-          <img src='https://thumbs.dreamstime.com/b/cat-dog-pink-paw-icon-isolated-white-background-premium-quality-vector-design-element-161321432.jpg'alt='fdfdf'
-          style={{width:"70px"}}/>
+          <PetsIcon sx={{display: { xs: 'none', md: 'flex' }, mr: 2, color:"#FF93D1"}} />
           <Typography
             variant="h6"
             noWrap
@@ -68,7 +67,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="default"
             >
               <MenuIcon />
             </IconButton>
@@ -87,7 +86,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: 'block', md: 'none', },
               }}
             >
               {pages.map((page) => (
@@ -97,7 +96,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <PetsIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, color:"#FF93D1"}} />
           <Typography
             variant="h5"
             noWrap
@@ -110,11 +109,11 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: 'black',
               textDecoration: 'none',
             }}
           >
-            LOGO
+            PETGISTRY
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
