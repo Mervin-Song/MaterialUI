@@ -23,9 +23,9 @@ const Login = () => {
               <Typography style={{textAlign:"right"}}>
                    <Link href="#" >
                       Forgot password?
-              </Link>
+                    </Link>
               </Typography>
-              <FormControlLabel style={{position:'relative',top:'-32.5px' }}
+              <FormControlLabel style={{ position:'relative',top:'-32.5px' }}
                   control={
                   <Checkbox
                       name="checkedB"

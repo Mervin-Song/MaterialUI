@@ -51,7 +51,7 @@ const [value, setValue] = React.useState(0);
 
   return (
     <Box sx={{ width: '100%', margin:'auto', padding:'10px 10px' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Box sx={{ borderBottom: 1, borderColor: '#eeeee4' }}>
         <Tabs value={value} onChange={handleChange} aria-label="sign up" centered>
           <Tab label="Sign Up As A Pet Owner" {...a11yProps(0)} />
           <Tab label="Sign Up As A Service Provider" {...a11yProps(1)} />
