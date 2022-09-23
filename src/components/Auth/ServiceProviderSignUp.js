@@ -1,34 +1,25 @@
-import {
-  Grid,
-  Paper,
-  Avatar,
-  TextField,
-  Button,
-  Typography,
-  Link,
-  Box
-} from "@mui/material";
+import {Grid,Paper,Avatar,TextField,Button,Typography,Link,Box,Container} from "@mui/material";
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import FormHelperText from '@mui/material/FormHelperText';
 import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
 import Checkbox from "@mui/material/Checkbox";
-import * as React from "react";
+import {useState, useEffect} from "react";
+import UploadFiles from "../functional/UploadFiles";
 
 const ServiceProviderSignUp = () => {
   const paperStyle = {
     padding: 20,
-    height: 1350,
-    width: 600,
+    height: 1500,
+    width: 500,
     margin: "50px auto",
   };
   const avatarStyle = { backgroundColor: "#3043FF" };
-  const btnStyle = { margin: "5px 0", height: "45px" };
+  const btnStyle = { margin: "20px 0", height: "45px" };
   const textFieldStyle = { margin: "10px auto" };
-  
-  const [state, setState] = React.useState({
+
+  const [state, setState] = useState({
     Food: false,
     Vet: false,
     Grooming: false,
@@ -38,7 +29,7 @@ const ServiceProviderSignUp = () => {
     Others: ''
   });
 
-  const [formState, setFormState] = React.useState({
+  const [formState, setFormState] = useState({
     username:'',
     email:'',
     password:'',
@@ -48,12 +39,41 @@ const ServiceProviderSignUp = () => {
     businessDescription:'',
   })
 
-  const handleChange = (event) => {
+  const handleChange = (e) => {
     setState({
       ...state,
-      [event.target.name]: event.target.checked,
+      [e.target.name]: e.target.checked,
     });
   };
+
+  const [files, setFiles] = useState([]);
+
+    // state that will hold the Array of objects
+    // initialized with empty array
+    // onChange function that reads files on uploading them
+    // files read are encoded as Base64
+    const onFileUpload = (e) => {
+      e.preventDefault();
+      // Get the file Id
+      let id = e.target.id;
+      // Create an instance of FileReader API
+      let file_reader = new FileReader();
+      // Get the actual file itself
+      let file = e.target.files[0];
+      file_reader.onload = () => {
+        // After uploading the file
+        // appending the file to our state array
+        // set the object keys and values accordingly
+        setFiles([...files, { file_id: id, uploaded_file: file_reader.result }]);
+      };
+      // reading the actual uploaded file
+      file_reader.readAsDataURL(file);
+    }
+
+  const handleSubmit = (e) =>{
+    //take all the form states and submit to database
+    //1.formstate, state and the files
+  }
 
   const { Food, Vet, Grooming, PetHotel, PetFuneral, Fosterers, Others } = state;
   const error = [Food, Vet, Grooming, PetHotel, PetFuneral, Fosterers, Others].filter((v) => v).length < 1;
@@ -185,12 +205,26 @@ const ServiceProviderSignUp = () => {
         </FormGroup>
       </FormControl>
         </Box>
+        Upload Your ACRA Documents (.pdf)
+    <Container style={{border:"1px solid black", display:"inline-flex", padding:"20px"}}>
+      <form>
+        <div className="upload--button">
+          <input
+            onChange={onFileUpload}
+            id={1}
+            accept=".pdf"
+            type="file"
+          />
+        </div>
+        </form>
+    </Container>
         <Button
           type="submit"
           color="primary"
           variant="contained"
           style={btnStyle}
           fullWidth
+          onSubmit={handleSubmit}
         >
           Sign Up As A Service Provider!
         </Button>
