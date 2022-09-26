@@ -11,15 +11,18 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import PetsIcon from '@mui/icons-material/Pets';
 const Navbar = () => {
     
 const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const loggedInSettings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const loggedOutSettings = ['Login']
+
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [loginState, setLoginState] = React.useState(false)
+    const [loginRender, setLoginRender] = React.useState(loggedInSettings)
   
     const handleOpenNavMenu = (event) => {
       setAnchorElNav(event.currentTarget);
@@ -35,7 +38,18 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
     const handleCloseUserMenu = () => {
       setAnchorElUser(null);
     };
-    //we define useStyles as classes
+    
+    //this is the navbar toggle logic later when we auth the user to be logged in and we render the loggedInStatus Navbar
+    const handleLoginState = () =>{
+      setLoginState(!loginState)
+      if(loginState === true){
+        setLoginRender(loggedInSettings)
+      }
+      else{
+        setLoginRender(loggedOutSettings)
+      }
+    }
+
   return (
     // sx the opener to define css code
     <AppBar position="static" style={{backgroundColor:"white"}}>
@@ -98,7 +112,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
           </Box>
           <PetsIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, color:"#FF93D1"}} />
           <Typography
-            variant="h5"
+            variant="h6"
             noWrap
             component="a"
             href=""
@@ -149,12 +163,18 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {loginState ? loginRender.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center" color="black">{setting}</Typography>
                 </MenuItem>
-              ))}
+              )):loginRender.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center" color="black">{setting}</Typography>
+                </MenuItem>
+              ))
+              }
             </Menu>
+            <button onClick={()=>handleLoginState()}>Click To Login</button>
           </Box>
         </Toolbar>
       </Container>
