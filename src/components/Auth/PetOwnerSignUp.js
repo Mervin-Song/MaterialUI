@@ -31,7 +31,7 @@ const PetOwnerSignUp = () => {
   //styling
   const paperStyle = {
     padding: 20,
-    height: "70vh",
+    height: 630,
     width: 400,
     margin: "50px auto",
   };
@@ -41,7 +41,7 @@ const PetOwnerSignUp = () => {
   
   return (
     <Grid>
-      <Paper elevation={10} style={paperStyle}>
+      <Paper elevation={10} style={paperStyle} component="form">
         <Grid align="center" sx={{ padding: 5 }}>
           <Avatar style={avatarStyle}>
             <PetsIcon />

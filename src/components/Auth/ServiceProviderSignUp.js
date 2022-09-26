@@ -1,12 +1,22 @@
-import {Grid,Paper,Avatar,TextField,Button,Typography,Link,Box,Container} from "@mui/material";
-import FormLabel from '@mui/material/FormLabel';
-import FormControl from '@mui/material/FormControl';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import {
+  Grid,
+  Paper,
+  Avatar,
+  TextField,
+  Button,
+  Typography,
+  Link,
+  Box,
+  Container,
+} from "@mui/material";
+import FormLabel from "@mui/material/FormLabel";
+import FormControl from "@mui/material/FormControl";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
 import Checkbox from "@mui/material/Checkbox";
-import {useState, useEffect} from "react";
-import UploadFiles from "../functional/UploadFiles";
+import { useState, useEffect } from "react";
+
 
 const ServiceProviderSignUp = () => {
   const paperStyle = {
@@ -26,57 +36,58 @@ const ServiceProviderSignUp = () => {
     PetHotel: false,
     PetFuneral: false,
     Fosterers: false,
-    Others: ''
+    Others: false,
+    OthersDescription: "",
   });
 
   const [formState, setFormState] = useState({
-    username:'',
-    email:'',
-    password:'',
-    registeredCompanyName:'',
-    companyAddress:'',
-    businessContact:'',
-    businessDescription:'',
-  })
+    username: "",
+    email: "",
+    password: "",
+    registeredCompanyName: "",
+    companyAddress: "",
+    businessContact: "",
+    businessDescription: "",
+  });
 
-  const handleChange = (e) => {
-    setState({
-      ...state,
-      [e.target.name]: e.target.checked,
-    });
-  };
+  console.log(state);
 
   const [files, setFiles] = useState([]);
+  // state that will hold the Array of objects
+  // initialized with empty array
+  // onChange function that reads files on uploading them
+  // files read are encoded as Base64
+  const onFileUpload = (e) => {
+    e.preventDefault();
+    // Get the file Id
+    let id = e.target.id;
+    // Create an instance of FileReader API
+    let file_reader = new FileReader();
+    // Get the actual file itself
+    let file = e.target.files[0];
+    file_reader.onload = () => {
+      // After uploading the file
+      // appending the file to our state array
+      // set the object keys and values accordingly
+      setFiles([...files, { file_id: id, uploaded_file: file_reader.result }]);
+    };
+    // reading the actual uploaded file
+    file_reader.readAsDataURL(file);
+  };
 
-    // state that will hold the Array of objects
-    // initialized with empty array
-    // onChange function that reads files on uploading them
-    // files read are encoded as Base64
-    const onFileUpload = (e) => {
-      e.preventDefault();
-      // Get the file Id
-      let id = e.target.id;
-      // Create an instance of FileReader API
-      let file_reader = new FileReader();
-      // Get the actual file itself
-      let file = e.target.files[0];
-      file_reader.onload = () => {
-        // After uploading the file
-        // appending the file to our state array
-        // set the object keys and values accordingly
-        setFiles([...files, { file_id: id, uploaded_file: file_reader.result }]);
-      };
-      // reading the actual uploaded file
-      file_reader.readAsDataURL(file);
-    }
-
-  const handleSubmit = (e) =>{
+  const handleSubmit = (e) => {
+    e.preventDefault();
     //take all the form states and submit to database
     //1.formstate, state and the files
-  }
+  };
 
-  const { Food, Vet, Grooming, PetHotel, PetFuneral, Fosterers, Others } = state;
-  const error = [Food, Vet, Grooming, PetHotel, PetFuneral, Fosterers, Others].filter((v) => v).length < 1;
+  console.log(formState);
+  const { Food, Vet, Grooming, PetHotel, PetFuneral, Fosterers, Others } =
+    state;
+  const error =
+    [Food, Vet, Grooming, PetHotel, PetFuneral, Fosterers, Others].filter(
+      (v) => v
+    ).length < 1;
 
   return (
     <Grid>
@@ -93,6 +104,9 @@ const ServiceProviderSignUp = () => {
           placeholder="Enter Username"
           fullWidth
           required
+          onChange={(e) =>
+            setFormState({ ...formState, username: e.target.value })
+          }
         />
         <TextField
           style={textFieldStyle}
@@ -100,6 +114,9 @@ const ServiceProviderSignUp = () => {
           placeholder="Enter Email"
           fullWidth
           required
+          onChange={(e) =>
+            setFormState({ ...formState, email: e.target.value })
+          }
         />
         <TextField
           style={textFieldStyle}
@@ -108,6 +125,9 @@ const ServiceProviderSignUp = () => {
           type="password"
           fullWidth
           required
+          onChange={(e) =>
+            setFormState({ ...formState, password: e.target.value })
+          }
         />
         <TextField
           style={textFieldStyle}
@@ -116,14 +136,22 @@ const ServiceProviderSignUp = () => {
           type="password"
           fullWidth
           required
+          onChange={(e) =>
+            setFormState({ ...formState, confirmpassword: e.target.value })
+          }
         />
-
         <TextField
           style={textFieldStyle}
           label="Registered Company Name"
           placeholder="Enter Company Name"
           fullWidth
           required
+          onChange={(e) =>
+            setFormState({
+              ...formState,
+              registeredCompanyName: e.target.value,
+            })
+          }
         />
         <TextField
           style={textFieldStyle}
@@ -131,6 +159,9 @@ const ServiceProviderSignUp = () => {
           placeholder="Enter Company Address"
           fullWidth
           required
+          onChange={(e) =>
+            setFormState({ ...formState, companyAddress: e.target.value })
+          }
         />
         <TextField
           style={textFieldStyle}
@@ -138,8 +169,10 @@ const ServiceProviderSignUp = () => {
           placeholder="Enter Business Contact Number"
           fullWidth
           required
+          onChange={(e) =>
+            setFormState({ ...formState, businessContact: e.target.value })
+          }
         />
-
         <TextField
           style={textFieldStyle}
           id="outlined-multiline-static"
@@ -148,83 +181,142 @@ const ServiceProviderSignUp = () => {
           rows={5}
           placeholder="Enter Business Description (Max 100 words)"
           fullWidth
+          onChange={(e) =>
+            setFormState({ ...formState, businessDescription: e.target.value })
+          }
         />
         <Box>
-        <FormControl
-        required
-        error={error}
-        component="fieldset"
-        sx={{ m: 3 }}
-        variant="standard"
-      >
-        <FormLabel component="legend">Pick at least one of the options below that describes your services.</FormLabel>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Checkbox checked={Food} onChange={handleChange} name="Food"/>
-            }
-            label="Food"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox checked={Vet} onChange={handleChange} name="Vet"/>
-            }
-            label="Vet"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox checked={Grooming} onChange={handleChange} name="Grooming" />
-            }
-            label="Grooming"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox checked={PetFuneral} onChange={handleChange} name="PetFuneral" />
-            }
-            label="Pet Funerals"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox checked={Fosterers} onChange={handleChange} name="Fosterers" />
-            }
-            label="Fosterers & Adopters"
-          />
-           <FormControlLabel
-            control={
-              <Checkbox checked={PetHotel} onChange={handleChange} name="PetHotel" />
-            }
-            label="Pet Hotels"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox checked={Others} onChange={handleChange} name="Others" />
-            }
-            label="Others"
-          />
-          <TextField id="standard-basic" label="Others" variant="standard" size="small" helperText="Fill this in if your services are not found in the above checkboxes"/>
-        </FormGroup>
-      </FormControl>
+          <FormControl
+            required
+            error={error}
+            component="fieldset"
+            sx={{ m: 3 }}
+            variant="standard"
+          >
+            <FormLabel component="legend">
+              Pick at least one of the options below that describes your
+              services.
+            </FormLabel>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={Food}
+                    onChange={(e) =>
+                      setState({ ...state, [e.target.name]: e.target.checked })
+                    }
+                    name="Food"
+                  />
+                }
+                label="Food"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={Vet}
+                    onChange={(e) =>
+                      setState({ ...state, [e.target.name]: e.target.checked })
+                    }
+                    name="Vet"
+                  />
+                }
+                label="Vet"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={Grooming}
+                    onChange={(e) =>
+                      setState({ ...state, [e.target.name]: e.target.checked })
+                    }
+                    name="Grooming"
+                  />
+                }
+                label="Grooming"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={PetFuneral}
+                    onChange={(e) =>
+                      setState({ ...state, [e.target.name]: e.target.checked })
+                    }
+                    name="PetFuneral"
+                  />
+                }
+                label="Pet Funerals"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={Fosterers}
+                    onChange={(e) =>
+                      setState({ ...state, [e.target.name]: e.target.checked })
+                    }
+                    name="Fosterers"
+                  />
+                }
+                label="Fosterers & Adopters"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={PetHotel}
+                    onChange={(e) =>
+                      setState({ ...state, [e.target.name]: e.target.checked })
+                    }
+                    name="PetHotel"
+                  />
+                }
+                label="Pet Hotels"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={Others}
+                    onChange={(e) =>
+                      setState({ ...state, [e.target.name]: e.target.checked })
+                    }
+                    name="Others"
+                  />
+                }
+                label="Others"
+              />
+              <TextField
+                onChange={(e) =>
+                  setState({ ...state, [e.target.name]: e.target.value })
+                }
+                name="OthersDescription"
+                id="standard-basic"
+                label="Others"
+                variant="standard"
+                size="small"
+                helperText="Fill this in if your services are not found in the above checkboxes."
+              />
+            </FormGroup>
+          </FormControl>
         </Box>
         Upload Your ACRA Documents (.pdf)
-    <Container style={{border:"1px solid black", display:"inline-flex", padding:"20px"}}>
-      <form>
-        <div className="upload--button">
-          <input
-            onChange={onFileUpload}
-            id={1}
-            accept=".pdf"
-            type="file"
-          />
-        </div>
-        </form>
-    </Container>
+        <Container
+          style={{
+            border: "1px solid black",
+            display: "inline-flex",
+            padding: "20px",
+          }}
+        >
+          <form>
+            <div className="upload--button">
+              <input onChange={onFileUpload} id={1} accept=".pdf" type="file" />
+            </div>
+          </form>
+        </Container>
         <Button
           type="submit"
           color="primary"
           variant="contained"
           style={btnStyle}
           fullWidth
-          onSubmit={handleSubmit}
+          onSubmit={(e) => handleSubmit(e)}
         >
           Sign Up As A Service Provider!
         </Button>
