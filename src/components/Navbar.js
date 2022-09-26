@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import PetsIcon from '@mui/icons-material/Pets';
+import Link from '@mui/material/Link';
 const Navbar = () => {
     
 const pages = ['Products', 'Pricing', 'Blog'];
@@ -105,17 +106,21 @@ const loggedOutSettings = ['Login']
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center">
+                      <Link underline='none' color='black' href={`/${page}`}>
+                        {page}
+                      </Link>
+                    </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <PetsIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, color:"#FF93D1"}} />
+          <PetsIcon component='a' href='/' sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, color:"#FF93D1"}} />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href=""
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -136,13 +141,15 @@ const loggedOutSettings = ['Login']
                 onClick={handleCloseNavMenu}
                 sx={{ mx:2 ,my: 2, color: 'black', display: 'block' }}
               >
-                {page}
+                <Link underline='none' color='black' href={`/${page}`}>
+                  {page}
+                </Link>
               </Button>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Open Profile Settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
@@ -165,16 +172,24 @@ const loggedOutSettings = ['Login']
             >
               {loginState ? loginRender.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center" color="black">{setting}</Typography>
+                  <Typography textAlign="center" color="black">
+                    <Link underline='none' color='black' href={`/${setting}`}>
+                    {setting}
+                    </Link>
+                  </Typography>
                 </MenuItem>
               )):loginRender.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center" color="black">{setting}</Typography>
+                  <Typography textAlign="center" color="black">
+                  <Link underline='none' color='black' href={`/${setting}`}>
+                    {setting}
+                    </Link>
+                  </Typography>
                 </MenuItem>
               ))
               }
             </Menu>
-            <button onClick={()=>handleLoginState()}>Click To Login</button>
+            <button onClick={(e)=>handleLoginState(e)}>Toggle Login State to see cond. render</button>
           </Box>
         </Toolbar>
       </Container>
