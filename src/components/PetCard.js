@@ -36,16 +36,15 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import Data from "./Data";
 
 const PetCard = () => {
-  const pets = Data;
+  
+  const pets = Data; //can be data
+  
   //in the future can use mapping function to map through database. Render data with useEffect.
   return (
     <div>
       <Grid
         container
         spacing={3}
-        direction="row"
-        justify="flex-start"
-        alignItems="flex-start"
       >
         {pets.map((elem) => (
           <Grid
@@ -56,7 +55,7 @@ const PetCard = () => {
             md={4}
             key={pets.indexOf(elem)}
           >
-            <Card elevation={5}>
+            <Card elevation={5} style={{borderRadius:'30'}}>
               <CardHeader
                 avatar={
                   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -78,13 +77,13 @@ const PetCard = () => {
                 alt="Paella dish"
               />
               <CardContent>
-                <Typography fontSize="24" gutterBottom>
+                <Typography fontSize="18" gutterBottom>
                   This impressive paella is a perfect party dish and a fun meal
                   to cook together with your guests. Add 1 cup of frozen peas
                   along with the mussels, if you like.
                 </Typography>
-                <TableContainer component={Paper} elevation={5}>
-                  <Table sx={{ maxWidth: 400 }} size="small" aria-label="a dense table">
+                <TableContainer sx={{marginTop:'20px'}} component={Paper} elevation={3}>
+                  <Table sx={{ maxWidth: 350 }} size="small" aria-label="a dense table">
                     <TableHead>
                       <TableRow>
                         <TableCell align="center">Vaccine Type</TableCell>
@@ -98,11 +97,11 @@ const PetCard = () => {
                           <TableCell align="center" component="th" scope="row">
                             {key}
                           </TableCell>
-                          <TableCell align="center">
+                          <TableCell align="center" >
                             {elem.vaccinationTypes[key] ? (
-                          <DoneOutlineIcon
+                          <DoneOutlineIcon 
                             sx={{
-                              marginTop: 2,
+                              marginTop: 0.5,
                               height: "18px",
                               color: "green",
                             }}
@@ -110,7 +109,7 @@ const PetCard = () => {
                         ) : (
                           <CancelIcon
                             sx={{
-                              marginTop: 2,
+                              marginTop: 0.5,
                               height: "18px",
                               color: "red",
                             }}

@@ -6,15 +6,11 @@ import Container from '@mui/material/Container';
 const PetOwnerLandingPage = () => {
   return (
     <Container>
-    <Grid>
-      <Box sx={{ width: '100%', overflow:'auto'}}>
-      <Grid container >
-        <Grid>
-          <PetCard />
-        </Grid>
+      <Grid>
+        <Box sx={{ width: '100%'}}>
+          <PetCard /> 
+        </Box>  
       </Grid>
-      </Box>  
-    </Grid>
     </Container>
   )
 }
