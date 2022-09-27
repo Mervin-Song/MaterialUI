@@ -45,9 +45,11 @@ export default function SignInOutTab() {
   
 const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (e, newValue) => {
+    e.preventDefault()
     setValue(newValue);
   };
+
 
   return (
     <Box sx={{ width: '100%', margin:'auto', padding:'10px 10px' }}>

@@ -38,7 +38,7 @@ const UploadFiles = () => {
             type="file"
           />
         </div>
-        </form>
+      </form>
     </Container>
     </>
     );

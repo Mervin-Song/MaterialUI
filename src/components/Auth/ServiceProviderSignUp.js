@@ -17,7 +17,6 @@ import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
 import Checkbox from "@mui/material/Checkbox";
 import { useState, useEffect } from "react";
 
-
 const ServiceProviderSignUp = () => {
   const paperStyle = {
     padding: 20,
@@ -74,20 +73,25 @@ const ServiceProviderSignUp = () => {
     // reading the actual uploaded file
     file_reader.readAsDataURL(file);
   };
+  
+  useEffect(()=>{
+    console.log(files)
+  },[state])
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (e.target.files.length <= 0) {
+      return alert(
+        "Form Submission Error: Please ensure that you have selected your ACRA pdf document for upload."
+      );
+    }
     //take all the form states and submit to database
     //1.formstate, state and the files
   };
 
   console.log(formState);
-  const { Food, Vet, Grooming, PetHotel, PetFuneral, Fosterers, Others } =
-    state;
-  const error =
-    [Food, Vet, Grooming, PetHotel, PetFuneral, Fosterers, Others].filter(
-      (v) => v
-    ).length < 1;
+  const { Food, Vet, Grooming, PetHotel, PetFuneral, Fosterers, Others } = state;
+  const error = [Food, Vet, Grooming, PetHotel, PetFuneral, Fosterers, Others].filter((v) => v).length < 1;
 
   return (
     <Grid>

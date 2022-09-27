@@ -9,23 +9,8 @@ const PetOwnerLandingPage = () => {
     <Grid>
       <Box sx={{ width: '100%', overflow:'auto'}}>
       <Grid container >
-        <Grid xs={4}>
+        <Grid>
           <PetCard />
-        </Grid>
-        <Grid xs={4}>
-        <PetCard />
-        </Grid>
-        <Grid xs={4}>
-        <PetCard />
-        </Grid>
-        <Grid xs={4}>
-        <PetCard />
-        </Grid>
-        <Grid xs={4}>
-        <PetCard />
-        </Grid>
-        <Grid xs={4}>
-        <PetCard />
         </Grid>
       </Grid>
       </Box>  
