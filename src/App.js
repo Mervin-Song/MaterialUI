@@ -8,6 +8,7 @@ import Login from './components/Auth/Login';
 import Error from './components/Error';
 import SignInOutTab from './components/Auth/SignInOutTab';
 import PetOwnerAddPet from './components/petowner/PetOwnerAddPet';
+import PetOwnerEditPet from './components/petowner/PetOwnerEditPet';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignInOutTab />} />
           <Route path='/addpet' element={<PetOwnerAddPet />} />
+          <Route path='/editpet' element={<PetOwnerEditPet />} />
         <Route path='*' element={<Error />} />
         </Route>
       </Routes>

@@ -39,6 +39,7 @@ const PetOwnerEditPet = ({pets}) => {
     const [imagesURL, setImagesURL] = useState([])
     const [fileName, setFileName] = useState([])
     const [formState, setFormState] = useState({
+    UID: pets[0].UID,
     type: "",
     name: "",
     breed: "",
