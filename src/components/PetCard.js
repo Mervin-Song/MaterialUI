@@ -30,19 +30,20 @@ import Paper from "@mui/material/Paper";
 //All the icons used
 import IconButton from "@mui/material/IconButton";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditIcon from "@mui/icons-material/Edit";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import CancelIcon from "@mui/icons-material/Cancel";
 
 //random ass data for viewing
 import Data from "./Data";
+import PetOwnerEditPet from "./petowner/PetOwnerEditPet";
 
 const PetCard = () => {
 
   let navigate = useNavigate()
   
   const [pets, setPets] = useState(Data); //can be data from DB
+  const [edit, SetEdit] = useState(false)
 
   const handleItemRemove = (UID) => {
     console.log("delete", UID);
@@ -59,7 +60,7 @@ const PetCard = () => {
       return item.UID === UID;
     });
     setPets(newList);
-    console.log(newList);
+    SetEdit(true)
   };
 
   const routeToAddPet = () =>{
@@ -70,8 +71,11 @@ const PetCard = () => {
   }, []);
   //in the future can use mapping function to map through database. Render data with useEffect.
   return (
-    <div>
-      <Button onClick={routeToAddPet}> Click to add pet</Button>
+    edit ? 
+    ( <PetOwnerEditPet pets={pets}/>) : (
+    
+    <>
+    <Button onClick={routeToAddPet}> Click to add pet</Button>
       <Grid container spacing={3}>
         {pets.map((elem) => (
           <Grid
@@ -112,7 +116,6 @@ const PetCard = () => {
                 title={`${elem.name}`}
                 subheader={`${elem.breed}`}
               />
-
               <CardMedia
                 component="img"
                 height="250"
@@ -193,7 +196,7 @@ const PetCard = () => {
           </Grid>
         ))}
       </Grid>
-    </div>
+    </>)
   );
 };
 

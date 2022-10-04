@@ -30,20 +30,61 @@ import TableRow from '@mui/material/TableRow';
 
 import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
-// import './petcard.css';
-const PetOwnerAddPet = () => {
+
+const PetOwnerEditPet = ({pets}) => {
+
     const [images, setImages] = useState([])
     const [imagesURL, setImagesURL] = useState([])
     const [fileName, setFileName] = useState([])
-    const maxFileLimit = 3
-  
+    const [formState, setFormState] = useState({
+    type: "",
+    name: "",
+    breed: "",
+    description: "",
+    vaccinationStatus: "",
+    medicalRecords: "",
+    img:""
+    })
+    const [nameTextRender, setNameTextRender ] = useState(false)
+    const [breedTextRender, setBreedTextRender ] = useState(false)
+    const [descriptionTextRender, setDescriptionTextRender ] = useState(false)
+    const [vaccineTextRender, setVaccineTextRender ] = useState(false)
+    const [imageRender, setImageRender] = useState(false)
+    const [medicalRecordsRender , setMedicalRecordsRender] = useState(false)
+
+    console.log(typeof(pets))
+
     const handleImageChange = (e) =>{
       setImages([...e.target.files])
       var file = e.target.files[0].name
       setFileName(file)
     }
-  
+
+    const handleNameTextChange = (e) =>{
+     setNameTextRender(true)
+    }
+
+    const handleBreedTextChange = (e) =>{
+        setBreedTextRender(true)
+    }
+
+    const handleDescriptionTextChange = (e) =>{
+        setDescriptionTextRender(true)
+    }
+
+    const handleVaccineTextChange = (e) =>{
+        setVaccineTextRender(true)
+    }
+
+    const handleImageRender = (e) =>{
+        setImageRender(true)
+    }
+
+    const handleMedicalRecordsRender = (e) =>{
+        setMedicalRecordsRender(true)
+    }
 
 const paperStyle = {
     padding: 20,
@@ -59,16 +100,7 @@ const paperStyle = {
   const btnStyle = { margin: "20px 0", height: "45px" };
   const textFieldStyle = { margin: "10px auto" };
 
-  const [formState, setFormState] = useState({
-    type: "",
-    name: "",
-    breed: "",
-    description: "",
-    vaccinationStatus: "",
-    medicalRecords: "",
-    img:"",
-  });
-
+  const maxFileLimit = 3;
   const [files, setFiles] = useState([]);
   // state that will hold the Array of objects
   // initialized with empty array
@@ -91,6 +123,7 @@ const paperStyle = {
     // reading the actual uploaded file
     file_reader.readAsDataURL(file);
   };
+
   useEffect(()=>{
     if(images.length<1 || images.length>maxFileLimit) return;
     const newImageUrls = [];
@@ -135,19 +168,19 @@ const paperStyle = {
                     <MoreVertIcon />
                   </IconButton>
                 }
-                title={`${formState.name}`}
-                subheader={`${formState.breed}`}
+                title={nameTextRender ? (`${formState.name}`):(`${pets[0].name}`)}
+                subheader={ breedTextRender ? (`${formState.breed}`) :(`${pets[0].breed}`)}
               />
               <CardMedia
                 component="img"
                 height="250"
-                image={imagesURL}
+                image={ imageRender ? (imagesURL) : (pets[0].img)}
                 alt="Your Image will be displayed once uploaded"
               />
               <CardContent>
                 <Typography style={{ wordWrap:'break-word', display: 'inline-flex'}} fontSize="18" gutterBottom placeholder="Type your pet description here!">
                     <Box sx={{ textAlign: 'justify', m: 1 , maxWidth:"500px" }}>
-                        {formState.description}
+                        {descriptionTextRender ? (formState.description) : (pets[0].description)}
                     </Box>
                 </Typography>
                 <TableContainer sx={{marginTop:'20px'}} component={Paper} elevation={3}>
@@ -160,7 +193,7 @@ const paperStyle = {
                   <TableBody>
                     <TableRow >
                         <TableCell align="center">
-                           {formState.vaccinationStatus}
+                           {vaccineTextRender ? (formState.vaccinationStatus) : (pets[0].vaccinationTypes.key)}
                         </TableCell>
                         </TableRow>
                     </TableBody>
@@ -172,7 +205,7 @@ const paperStyle = {
                     <Link
                       target="_blank"
                       rel="noopener"
-                      href={`${formState.medicalRecords}`}
+                      href={ `${pets[0].medicalRecords}`}
                     >
                       View Here
                     </Link>
@@ -184,9 +217,9 @@ const paperStyle = {
       <Paper elevation={10} style={paperStyle} component="form">
         <Grid align="center">
           <Avatar style={avatarStyle}>
-            <AttachFileIcon />
+            <ModeEditIcon />
           </Avatar>
-          <h2>Create Your Pet Card</h2>
+          <h2>Edit Your Pet Details!</h2>
         </Grid>
         <TextField
           style={textFieldStyle}
@@ -197,6 +230,7 @@ const paperStyle = {
           onChange={(e) =>
             setFormState({ ...formState, name: e.target.value })
           }
+          onInput={handleNameTextChange}
         />
         <TextField
           style={textFieldStyle}
@@ -217,6 +251,7 @@ const paperStyle = {
           onChange={(e) =>
             setFormState({ ...formState, breed: e.target.value })
           }
+          onInput={handleBreedTextChange}
         />
           <TextField
             style={textFieldStyle}
@@ -229,6 +264,7 @@ const paperStyle = {
             onChange={(e) =>
               setFormState({ ...formState, description: e.target.value })
             }
+            onInput={handleDescriptionTextChange}
           />
         <TextField
           style={textFieldStyle}
@@ -239,6 +275,7 @@ const paperStyle = {
           onChange={(e) =>
             setFormState({ ...formState, vaccinationStatus: e.target.value })
           }
+          onInput={handleVaccineTextChange}
         />
         Upload an image of your pet! (.png)
         <Container
@@ -250,7 +287,7 @@ const paperStyle = {
         >
           <form>
             <div className="upload--button">
-            <input type="file" multiple accept="Image/*" onChange={handleImageChange} />
+            <input type="file" multiple accept="Image/*" onChange={handleImageChange} onInput={handleImageRender}/>
             </div>
           </form>
         </Container>
@@ -264,7 +301,7 @@ const paperStyle = {
         >
           <form>
             <div className="upload--button">
-              <input onChange={onFileUpload} id={1} accept=".pdf" type="file" />
+              <input onChange={onFileUpload} id={1} accept=".pdf" type="file" onInput={handleMedicalRecordsRender} />
             </div>
           </form>
         </Container>
@@ -276,7 +313,7 @@ const paperStyle = {
           fullWidth
           onSubmit={(e) => handleSubmit(e)}
         >
-          Click to add your pet into petgistry as a pet owner!
+          Click to submit your edits to the pet card!
         </Button>
       </Paper>
     </Grid>
@@ -287,4 +324,4 @@ const paperStyle = {
   )
 }
 
-export default PetOwnerAddPet
+export default PetOwnerEditPet
