@@ -23,7 +23,7 @@ const UploadImage = () => {
     <Box textAlign='center'>
       <Button variant="contained" component="label" sx={{margin:'auto', paddingTop:'10px'}}>
         <AddIcon style={{height:25, position:'relative', top:'-2px',left:'-3px'}}/> Upload Your ACRA Details here
-        <input type="file" multiple accept="Image/*" onChange={handleImageChange} hidden />
+        <input type="file" multiple accept="Image/*" onChange={handleImageChange} hidden/>
       </Button>
       <Box>
       {imagesURL.map(image =>{

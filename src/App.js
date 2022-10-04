@@ -7,6 +7,7 @@ import PetOwnerLandingPage from './components/petowner/PetOwnerLandingPage';
 import Login from './components/Auth/Login';
 import Error from './components/Error';
 import SignInOutTab from './components/Auth/SignInOutTab';
+import PetOwnerAddPet from './components/petowner/PetOwnerAddPet';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route index element = {<PetOwnerLandingPage />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignInOutTab />} />
+          <Route path='/addpet' element={<PetOwnerAddPet />} />
         <Route path='*' element={<Error />} />
         </Route>
       </Routes>

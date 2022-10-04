@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 
 //Card detail imports
 import Card from "@mui/material/Card";
@@ -38,10 +39,15 @@ import Data from "./Data";
 const PetCard = () => {
   
   const pets = Data; //can be data
-  
+  let navigate = useNavigate()
+
+  const routeToAddPet = () =>{
+    navigate('/addpet')
+  }
   //in the future can use mapping function to map through database. Render data with useEffect.
   return (
     <div>
+      <Button onClick={routeToAddPet}>Click To Add Pet</Button>
       <Grid
         container
         spacing={3}
