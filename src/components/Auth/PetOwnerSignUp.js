@@ -32,13 +32,13 @@ const PetOwnerSignUp = () => {
   const paperStyle = {
     padding: 20,
     height: 630,
-    width: 400,
+    width: 500,
     margin: "50px auto",
   };
   const avatarStyle = { backgroundColor: "#FEADD2" };
   const btnStyle = { margin: "5px 0", height: "45px" };
   const textFieldStyle = { margin: "10px auto" };
-  
+
   return (
     <Grid>
       <Paper elevation={10} style={paperStyle} component="form">

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 //Card detail imports
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -39,11 +39,10 @@ import Data from "./Data";
 import PetOwnerEditPet from "./petowner/PetOwnerEditPet";
 
 const PetCard = () => {
+  let navigate = useNavigate();
 
-  let navigate = useNavigate()
-  
   const [pets, setPets] = useState(Data); //can be data from DB
-  const [edit, SetEdit] = useState(false)
+  const [edit, SetEdit] = useState(false);
 
   const handleItemRemove = (UID) => {
     console.log("delete", UID);
@@ -60,22 +59,21 @@ const PetCard = () => {
       return item.UID === UID;
     });
     setPets(newList);
-    SetEdit(true)
+    SetEdit(true);
   };
 
-  const routeToAddPet = () =>{
-    navigate('./addpet')
-  }
+  const routeToAddPet = () => {
+    navigate("./addpet");
+  };
   useEffect(() => {
     console.log(pets);
   }, []);
   //in the future can use mapping function to map through database. Render data with useEffect.
-  return (
-    edit ? 
-    ( <PetOwnerEditPet pets={pets}/>) : (
-    
+  return edit ? (
+    <PetOwnerEditPet pets={pets} />
+  ) : (
     <>
-    <Button onClick={routeToAddPet}> Click to add pet</Button>
+      <Button onClick={routeToAddPet}> Click to add pet</Button>
       <Grid container spacing={3}>
         {pets.map((elem) => (
           <Grid
@@ -196,7 +194,7 @@ const PetCard = () => {
           </Grid>
         ))}
       </Grid>
-    </>)
+    </>
   );
 };
 
