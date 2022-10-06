@@ -30,7 +30,6 @@ import Paper from "@mui/material/Paper";
 //All the icons used
 import IconButton from "@mui/material/IconButton";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditIcon from "@mui/icons-material/Edit";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -40,6 +39,7 @@ import Data from "./Data";
 
 const PetCard = () => {
   const [pets, setPets] = useState(Data); //can be data from DB
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleItemRemove = (UID) => {
     console.log("delete", UID);
@@ -52,6 +52,8 @@ const PetCard = () => {
 
   const handleItemEdit = (UID) => {
     console.log(UID);
+    setIsEditing(!isEditing);
+    console.log(isEditing);
     const newList = pets.filter((item) => {
       return item.UID === UID;
     });
@@ -59,9 +61,8 @@ const PetCard = () => {
     console.log(newList);
   };
 
-  useEffect(() => {
-    console.log(pets);
-  }, []);
+  useEffect(() => {}, []);
+
   //in the future can use mapping function to map through database. Render data with useEffect.
   return (
     <div>
